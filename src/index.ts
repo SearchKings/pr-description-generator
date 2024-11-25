@@ -1,5 +1,5 @@
 import { getInput, setFailed, setOutput } from '@actions/core';
-import github from '@actions/github';
+import { context } from '@actions/github';
 import { execSync } from 'child_process';
 import { generateDescription, updateDescription } from './utils';
 
@@ -20,8 +20,7 @@ Please generate a **Pull Request description** for the provided diff, following 
     getInput('replace_mode') || 'false'
   ) as boolean;
 
-  console.log('Inputs:', github);
-  const context = github.context;
+  console.log('context:', context);
 
   if (context.eventName !== 'pull_request') {
     setFailed('This action only runs on pull_request events.');
