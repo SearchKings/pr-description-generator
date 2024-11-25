@@ -11,10 +11,6 @@ on:
 jobs:
   generate-description:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
     steps:
       - uses: actions/checkout@v4
       - name: Generate PR Description
