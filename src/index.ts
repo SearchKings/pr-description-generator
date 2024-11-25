@@ -1,5 +1,5 @@
 import { getInput, setFailed, setOutput } from '@actions/core';
-import github from '@actions/github';
+import { context } from '@actions/github';
 import { execSync } from 'child_process';
 import { generateDescription, updateDescription } from './utils';
 
@@ -19,8 +19,7 @@ Please generate a **Pull Request description** for the provided diff, following 
   const replaceMode = JSON.parse(
     getInput('replace_mode') || 'false'
   ) as boolean;
-
-  const context = github.context;
+  const skipDiffFolders = (getInput('skip_diff_folders') || '').split(',');
 
   if (context.eventName !== 'pull_request') {
     setFailed('This action only runs on pull_request events.');
@@ -46,8 +45,16 @@ Please generate a **Pull Request description** for the provided diff, following 
   execSync(`git fetch origin ${baseRef} ${headRef}`);
 
   // Get the diff
-  const diffOutput = execSync(`git diff origin/${baseRef} origin/${headRef}`, {
-    encoding: 'utf8'
+  let diffCommand = `git diff origin/${baseRef} origin/${headRef}`;
+  if (skipDiffFolders.length) {
+    for (const folder of skipDiffFolders) {
+      diffCommand += ` ":(exclude)${folder}"`;
+    }
+  }
+
+  const diffOutput = execSync(diffCommand, {
+    encoding: 'utf8',
+    maxBuffer: 1024 * 1024 * 10
   });
 
   // Generate the PR description

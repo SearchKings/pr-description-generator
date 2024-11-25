@@ -11,10 +11,6 @@ on:
 jobs:
   generate-description:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
     steps:
       - uses: actions/checkout@v4
       - name: Generate PR Description
@@ -28,14 +24,15 @@ jobs:
 
 You can customize the action by providing the following inputs:
 
-| Input            | Description                                      | Required | Default                  |
-| ---------------- | ------------------------------------------------ | -------- | ------------------------ |
-| `openai_api_key` | Your OpenAI API Key                              | Yes      | N/A                      |
-| `openai_model`   | OpenAI model to use (e.g., gpt-4, gpt-3.5-turbo) | No       | gpt-4o-mini              |
-| `github_token`   | GitHub token with repo permissions               | Yes      | ${{ github.token }}      |
-| `temperature`    | Sampling temperature for OpenAI (0.0 to 1.0)     | No       | 0.7                      |
-| `user_prompt`    | The custom user prompt to send to OpenAI         | No       | The basic "Instructions" |
-| `replaceMode`    | Replace the existing PR description              | No       | 'false'                  |
+| Input               | Description                                                     | Required | Default                  |
+| ------------------- | --------------------------------------------------------------- | -------- | ------------------------ |
+| `openai_api_key`    | Your OpenAI API Key                                             | Yes      | N/A                      |
+| `openai_model`      | OpenAI model to use (e.g., gpt-4, gpt-3.5-turbo)                | No       | gpt-4o-mini              |
+| `github_token`      | GitHub token with repo permissions                              | Yes      | ${{ github.token }}      |
+| `temperature`       | Sampling temperature for OpenAI (0.0 to 1.0)                    | No       | 0.7                      |
+| `user_prompt`       | The custom user prompt to send to OpenAI                        | No       | The basic "Instructions" |
+| `replace_mode`      | Replace the existing PR description                             | No       | 'false'                  |
+| `skip_diff_folders` | Exclude paths from the Git diff command, a comma-separated list | No       | N/A, example: build,dist |
 
 ## 📤 Outputs
 

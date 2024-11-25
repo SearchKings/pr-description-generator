@@ -23,10 +23,13 @@ inputs:
     description: GitHub token with repo permissions
     required: true
     default: ${{ github.token }}
-  replaceMode:
+  replace_mode:
     description: Replace the existing PR description
     required: false
     default: false
+  skip_diff_folders:
+    description: Exclude paths from the Git diff command, a comma-separated list
+    required: false
 outputs:
   pr_number:
     description: The number of the pull request updated
