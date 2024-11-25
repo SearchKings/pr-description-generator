@@ -33,6 +33,6 @@
     "lint": "npx ",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
-    "build:prod": "npx esbuild src/index.ts --bundle --platform=node --target=es2020 --outdir=build --minify --keep-names"
+    "build:prod": "npx esbuild src/index.ts --bundle --platform=node --target=es2020 --outdir=build --minify"
   }
 }

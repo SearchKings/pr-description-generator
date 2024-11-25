@@ -20,8 +20,6 @@ Please generate a **Pull Request description** for the provided diff, following 
     getInput('replace_mode') || 'false'
   ) as boolean;
 
-  console.log('context:', context);
-
   if (context.eventName !== 'pull_request') {
     setFailed('This action only runs on pull_request events.');
     return;
