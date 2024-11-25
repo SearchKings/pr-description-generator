@@ -7,6 +7,7 @@ jobs:
   generate-description:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Generate PR Description
         uses: SearchKings/pr-description-generator@fix/test
         with:
