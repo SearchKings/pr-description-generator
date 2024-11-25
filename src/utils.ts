@@ -20,8 +20,8 @@ export const generateDescription = async ({
     apiKey: openaiApiKey
   });
 
-  const prompt = `${userPrompt}
-  **Diff:**
+  const prompt = `${userPrompt} \n
+  **Diff:** \n
   ${diffOutput}`;
 
   const response = await client.chat.completions.create({

@@ -10,11 +10,12 @@ import { generateDescription, updateDescription } from './utils';
   const temperature = parseFloat(getInput('temperature') || '0.7');
   const userPrompt =
     getInput('user_prompt') ||
-    `**Instructions:**
-Please generate a **Pull Request description** for the provided diff, following these guidelines:
-- Add appropriate emojis to the description.
-- Do **not** include the words "Title" and "Description" in your output.
-- Format your answer in **Markdown**.`;
+    `**Instructions:** \n
+      Please generate a **Pull Request description** for the provided diff, following these guidelines: \n
+      - Add appropriate emojis to the description.
+      - Do **not** include the words "Title" and "Description" in your output.
+      - Format your answer in **Markdown**.`;
+
   const githubToken = getInput('github_token', { required: true });
   const replaceMode = JSON.parse(
     getInput('replace_mode') || 'false'
