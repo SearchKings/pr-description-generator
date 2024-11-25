@@ -24,6 +24,8 @@ export const generateDescription = async ({
   **Diff:** \n
   ${diffOutput}`;
 
+  console.log(`final prompt: ${prompt}`);
+
   const response = await client.chat.completions.create({
     messages: [
       {

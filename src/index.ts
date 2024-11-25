@@ -53,18 +53,28 @@ import { generateDescription, updateDescription } from './utils';
     }
   }
 
+  console.log(`Running diff command: ${diffCommand}`);
+
   const diffOutput = execSync(diffCommand, {
     encoding: 'utf8',
     maxBuffer: 1024 * 1024 * 10
   });
+
+  console.log(`diffOutput 1: ${diffOutput}`);
+
+  const diffOutput2 = execSync(diffCommand, {
+    encoding: 'utf8'
+  });
+
+  console.log(`diffOutput 2: ${diffOutput2}`);
 
   // Generate the PR description
   const generatedDescription = await generateDescription({
     openaiApiKey,
     openaiModel,
     temperature,
-    userPrompt,
-    diffOutput
+    diffOutput,
+    userPrompt
   });
 
   // Update the PR
