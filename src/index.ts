@@ -20,6 +20,7 @@ Please generate a **Pull Request description** for the provided diff, following 
     getInput('replace_mode') || 'false'
   ) as boolean;
 
+  console.log('Inputs:', github);
   const context = github.context;
 
   if (context.eventName !== 'pull_request') {
