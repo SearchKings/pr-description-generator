@@ -77,7 +77,7 @@ export const updateDescription = async ({
     });
 
     const currentDescription = pullRequest.body || '';
-    newDescription = `${currentDescription}\n\n ✨ **GENERATED DESCRIPTION**:\n\n${generatedDescription}`;
+    newDescription = `${currentDescription}\n✨ **GENERATED DESCRIPTION**:\n\n${generatedDescription}`;
   }
 
   return octokit.rest.pulls.update({

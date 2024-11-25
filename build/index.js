@@ -86,8 +86,7 @@ https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
   **Diff:** 
 
   ${A}`;console.log(`final prompt: ${o}`);let a=await i.chat.completions.create({messages:[{role:"system",content:"You are a helpful assistant who generates pull request descriptions based on diffs."},{role:"user",content:o}],model:e,temperature:r,max_tokens:1024}),[n]=a?.choices||[];if(typeof n?.message?.content!="string")throw new Error("OpenAI API Error: invalid response \u2013 unexpected structure or missing content");return n.message.content.trim()},KI=async({githubToken:t,context:e,prNumber:r,replaceMode:A,generatedDescription:s})=>{let i=s,o=(0,XI.getOctokit)(t);if(!A){let{data:a}=await o.rest.pulls.get({owner:e.repo.owner,repo:e.repo.repo,pull_number:r});i=`${a.body||""}
-
- \u2728 **GENERATED DESCRIPTION**:
+\u2728 **GENERATED DESCRIPTION**:
 
 ${s}`}return o.rest.pulls.update({owner:e.repo.owner,repo:e.repo.repo,pull_number:r,body:i})};(async()=>{let t=(0,Tt.getInput)("openai_api_key",{required:!0}),e=(0,Tt.getInput)("openai_model")||"gpt-4o-mini",r=parseFloat((0,Tt.getInput)("temperature")||"0.7"),A=(0,Tt.getInput)("user_prompt")||`**Instructions:** 
 
