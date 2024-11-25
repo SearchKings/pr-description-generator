@@ -45,7 +45,8 @@ Please generate a **Pull Request description** for the provided diff, following 
 
   // Get the diff
   const diffOutput = execSync(`git diff origin/${baseRef} origin/${headRef}`, {
-    encoding: 'utf8'
+    encoding: 'utf8',
+    maxBuffer: 1024 * 1024 * 10
   });
 
   // Generate the PR description
