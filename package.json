@@ -14,6 +14,8 @@
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.12.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0"
@@ -22,5 +24,11 @@
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
     "openai": "^4.73.0"
+  },
+  "lint-staged": {
+    "**/*": "eslint"
+  },
+  "scripts": {
+    "prepare": "husky install"
   }
 }
