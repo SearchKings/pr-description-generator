@@ -1,5 +1,6 @@
 import { Context } from '@actions/github/lib/context';
 import github from '@actions/github';
+import { RestEndpointMethodTypes } from '@octokit/plugin-rest-endpoint-methods';
 import OpenAI from 'openai';
 
 export const generateDescription = async ({
@@ -61,7 +62,7 @@ export const updateDescription = async ({
   prNumber: number;
   replaceMode: boolean;
   generatedDescription: string;
-}) => {
+}): Promise<RestEndpointMethodTypes['pulls']['update']['response']> => {
   let newDescription: string = generatedDescription;
   const octokit = github.getOctokit(githubToken);
 
