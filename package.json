@@ -28,11 +28,6 @@
   "lint-staged": {
     "**/*": "npx eslint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx lint-staged && npm run build:prod"
-    }
-  },
   "scripts": {
     "prepare": "husky install",
     "lint": "npx ",
