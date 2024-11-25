@@ -20,7 +20,9 @@ import { generateDescription, updateDescription } from './utils';
   const replaceMode = JSON.parse(
     getInput('replace_mode') || 'false'
   ) as boolean;
-  const skipDiffFolders = (getInput('skip_diff_folders') || '').split(',');
+  const skipDiffFolders = (getInput('skip_diff_folders') || '')
+    .split(',')
+    .filter(Boolean);
 
   if (context.eventName !== 'pull_request') {
     setFailed('This action only runs on pull_request events.');
