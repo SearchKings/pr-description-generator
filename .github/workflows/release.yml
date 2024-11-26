@@ -29,8 +29,12 @@ jobs:
           npm run lint
           npm run build
           npm run semantic-release
+
           # Update build with latest version
-          npm run build:prod && git add build/\* && git commit -m "chore: update build" && git push
+          npm run build:prod
+          git config --global user.email "actions@github.com"
+          git config --global user.name "Github"
+          git add build/\* && git commit -m "chore: update build" && git push
 
   merge-release:
     needs: semantic-release
