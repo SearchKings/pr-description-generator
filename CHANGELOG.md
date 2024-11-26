@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/SearchKings/pr-description-generator/compare/v1.0.0...v1.0.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* ensure add git config before push ([1012162](https://github.com/SearchKings/pr-description-generator/commit/10121627876586d07104d8126b01c5fdf111860d))
+
 # 1.0.0 (2024-11-26)
 
 
