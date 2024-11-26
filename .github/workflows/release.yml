@@ -25,8 +25,10 @@ jobs:
         run: |
           npm ci
           npm run lint
-          npm run build:prod
+          npm run build
           npm run semantic-release
+          # Update build with latest version
+          npm run build:prod && git add build/\* && git commit -m "chore: update build" && git push
 
   merge-release:
     needs: semantic-release
