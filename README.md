@@ -34,7 +34,7 @@ You can customize the action by providing the following inputs:
 | `replace_mode`      | Replace the existing PR description                             | No       | 'false'                  |
 | `skip_diff_folders` | Exclude paths from the Git diff command, a comma-separated list | No       | N/A, example: build,dist |
 
-## 📤 Outputs
+## Outputs
 
 The action provides the following outputs:
 
