@@ -20,11 +20,15 @@ export const generateDescription = async ({
     apiKey: openaiApiKey
   });
 
-  const prompt = `${userPrompt} \n
+  const defaultPrompt = `**Instructions:** \n
+      Please generate a **Pull Request description** for the provided diff, following these guidelines: \n
+      - Add appropriate emojis to the description.
+      - Do **not** include the words "Title" and "Description" in your output.
+      - Format your answer in **Markdown**.`;
+
+  const prompt = `${userPrompt || defaultPrompt} \n
   **Diff:** \n
   ${diffOutput}`;
-
-  console.log(`final prompt: ${prompt}`);
 
   const response = await client.chat.completions.create({
     messages: [
@@ -77,7 +81,10 @@ export const updateDescription = async ({
     });
 
     const currentDescription = pullRequest.body || '';
-    newDescription = `${currentDescription}\n\n✨ **GENERATED DESCRIPTION**:\n\n${generatedDescription}`;
+
+    newDescription = `${currentDescription}\n\n---\n## ✨ GENERATED DESCRIPTION\n\n${generatedDescription}`;
+  } else {
+    newDescription = generatedDescription;
   }
 
   return octokit.rest.pulls.update({

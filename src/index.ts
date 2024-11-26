@@ -8,14 +8,7 @@ import { generateDescription, updateDescription } from './utils';
   const openaiApiKey = getInput('openai_api_key', { required: true });
   const openaiModel = getInput('openai_model') || 'gpt-4o-mini';
   const temperature = parseFloat(getInput('temperature') || '0.7');
-  const userPrompt =
-    getInput('user_prompt') ||
-    `**Instructions:** \n
-      Please generate a **Pull Request description** for the provided diff, following these guidelines: \n
-      - Add appropriate emojis to the description.
-      - Do **not** include the words "Title" and "Description" in your output.
-      - Format your answer in **Markdown**.`;
-
+  const userPrompt = getInput('user_prompt');
   const githubToken = getInput('github_token', { required: true });
   const replaceMode = JSON.parse(
     getInput('replace_mode') || 'false'
@@ -55,20 +48,10 @@ import { generateDescription, updateDescription } from './utils';
     }
   }
 
-  console.log(`Running diff command: ${diffCommand}`);
-
   const diffOutput = execSync(diffCommand, {
     encoding: 'utf8',
     maxBuffer: 1024 * 1024 * 10
   });
-
-  console.log(`diffOutput 1: ${diffOutput}`);
-
-  const diffOutput2 = execSync(diffCommand, {
-    encoding: 'utf8'
-  });
-
-  console.log(`diffOutput 2: ${diffOutput2}`);
 
   // Generate the PR description
   const generatedDescription = await generateDescription({
@@ -90,7 +73,7 @@ import { generateDescription, updateDescription } from './utils';
 
   setOutput('pr_number', prNumber.toString());
   setOutput('description', generatedDescription);
-  console.log(`Successfully updated PR #${prNumber} description.`);
+  console.log(`Successfully updated PR #${prNumber} description`);
 })().catch(error => {
   setFailed(error.message);
 });
