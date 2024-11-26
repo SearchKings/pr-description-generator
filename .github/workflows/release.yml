@@ -9,6 +9,7 @@ concurrency:
 
 env:
   NODE_VERSION: 20.9.0
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
 jobs:
   semantic-release:
@@ -23,12 +24,11 @@ jobs:
           node-version: lts/*
       - name: Semantic Release
         run: |
+          npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}
           npm ci
           npm run lint
-          npm run build
+          npm run build:prod
           npm run semantic-release
-          # Update build with latest version
-          npm run build:prod && git add build/\* && git commit -m "chore: update build" && git push
 
   merge-release:
     needs: semantic-release
