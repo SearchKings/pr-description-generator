@@ -8,6 +8,8 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "^9.15.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/node": "^22.9.3",
     "esbuild": "^0.24.0",
     "esbuild-register": "^3.6.0",
@@ -17,6 +19,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
+    "semantic-release": "^24.2.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.15.0"
   },
@@ -29,8 +32,9 @@
     "**/*": "npx eslint"
   },
   "scripts": {
+    "semantic-release": "semantic-release",
     "prepare": "husky install",
-    "lint": "npx ",
+    "lint": "npx eslint",
     "build": "npx tsc",
     "watch": "npx tsc --watch",
     "build:prod": "npx esbuild src/index.ts --bundle --platform=node --target=es2020 --outdir=build --minify"

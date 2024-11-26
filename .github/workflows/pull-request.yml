@@ -1,0 +1,32 @@
+name: Pull Request
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: 20.9.0
+  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+
+jobs:
+  generate-description:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Code Quality and Style
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+
+      - name: Test Generate PR Description
+        uses: SearchKings/pr-description-generator@${{BRANCH_NAME}}
+        with:
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_diff_folders: build
