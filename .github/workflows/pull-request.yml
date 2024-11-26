@@ -25,7 +25,7 @@ jobs:
           npm run build
 
       - name: Test Generate PR Description
-        uses: SearchKings/pr-description-generator@${{BRANCH_NAME}}
+        uses: SearchKings/pr-description-generator@${{env.BRANCH_NAME}}
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
