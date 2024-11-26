@@ -8,7 +8,6 @@ concurrency:
 
 env:
   NODE_VERSION: 20.9.0
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
 
 jobs:
   generate-description:
@@ -25,8 +24,7 @@ jobs:
           npm run build
 
       - name: Test Generate PR Description
-        uses: SearchKings/pr-description-generator@${{env.BRANCH_NAME}}
+        uses: jenseng/dynamic-uses@v1
         with:
-          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_diff_folders: build
+          uses: SearchKings/pr-description-generator@${{ github.head_ref || github.ref_name }}
+          with: '{ "openai_api_key": ${{ secrets.OPENAI_API_KEY }}, "github_token": ${{ secrets.GITHUB_TOKEN }}, "skip_diff_folders": "build" }'
