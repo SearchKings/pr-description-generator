@@ -1,9 +1,13 @@
 import { getInput, setFailed, setOutput } from '@actions/core';
 import { context } from '@actions/github';
 import { execSync } from 'child_process';
+
 import { generateDescription, updateDescription } from './utils';
+import { version } from '../package.json';
 
 (async () => {
+  console.log(`SearchKings/pr-description-generator@master: ${version}`);
+
   // Inputs
   const openaiApiKey = getInput('openai_api_key', { required: true });
   const openaiModel = getInput('openai_model') || 'gpt-4o-mini';

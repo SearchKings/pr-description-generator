@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generate PR Description
-        uses: yuri-val/auto-pr-description-action@v1
+        uses: SearchKings/pr-description-generator@master
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
