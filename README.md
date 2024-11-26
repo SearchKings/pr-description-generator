@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Generate PR Description
-        uses: yuri-val/auto-pr-description-action@v1
+        uses: SearchKings/pr-description-generator@master
         with:
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -34,7 +34,7 @@ You can customize the action by providing the following inputs:
 | `replace_mode`      | Replace the existing PR description                             | No       | 'false'                  |
 | `skip_diff_folders` | Exclude paths from the Git diff command, a comma-separated list | No       | N/A, example: build,dist |
 
-## 📤 Outputs
+## Outputs
 
 The action provides the following outputs:
 
